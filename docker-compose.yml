@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  pgsql:
+    image: postgres
+    environment:
+      POSTGRES_DB: "api"
+      POSTGRES_PASSWORD: "secret"
+      POSTGRES_SHARED_BUFFERS: 1GB
+      POSTGRES_WORK_MEM: 128MB
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+#    volumes:
+#      - ./pg/data:/var/lib/postgresql/data
+#      - ./pg/etc:/data
