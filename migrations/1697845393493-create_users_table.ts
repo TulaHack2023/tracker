@@ -5,13 +5,14 @@ export class CreateUsersTable1697845393493 implements MigrationInterface {
     await queryRunner.query(`CREATE TABLE public.users
                               (
                                   id         serial4 NOT NULL,
-                                  email      varchar NOT NULL,
-                                  "name"     varchar NOT NULL,
-                                  tg_name    varchar NOT NULL,
+                                  tel      varchar NOT NULL,
+                                  "name"     varchar NOT NULL DEFAULT (''),
+                                  tg_name    varchar NOT NULL DEFAULT (''),
                                   "password" varchar NOT NULL,
+                                  tg_session varchar NOT NULL DEFAULT (''),
                                   CONSTRAINT "PK_USER" PRIMARY KEY (id),
                                   CONSTRAINT "UQ_USER_TG_NAME" UNIQUE (tg_name),
-                                  CONSTRAINT "UQ_USER_EMAIL" UNIQUE (email)
+                                  CONSTRAINT "UQ_USER_TEL" UNIQUE (tel)
                               );`);
   }
 

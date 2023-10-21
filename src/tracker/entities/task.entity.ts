@@ -17,14 +17,27 @@ export enum TASK_STATUSES {
   APPROVING_DONE,
   DONE,
 }
+
+export const ROLE_TASK_STATUSES = {
+  USER: [
+    TASK_STATUSES.APPROVED_TIME,
+    TASK_STATUSES.WORK,
+    TASK_STATUSES.APPROVING_DONE,
+  ],
+};
+
 @Entity('tasks')
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  ownerId: number;
   @ManyToOne(() => User)
   owner: User;
 
+  @Column()
+  projectId: number;
   @ManyToOne(() => Project)
   project: Project;
 
@@ -40,6 +53,9 @@ export class Task {
   @Column({ nullable: false, unique: true })
   tgChatId: string;
 
+  @Column({ nullable: true })
+  duration?: number;
+
   @Column('jsonb', { nullable: false, default: [] })
   messages: [];
 
@@ -48,6 +64,10 @@ export class Task {
   users: User[];
 
   constructor(task: Partial<Task>) {
+    Object.assign(this, task);
+  }
+
+  public update(task: Partial<Task>) {
     Object.assign(this, task);
   }
 }
