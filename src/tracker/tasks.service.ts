@@ -20,6 +20,21 @@ export class TasksService {
     private usersRepo: Repository<User>,
     private entityManager: EntityManager,
   ) {}
+
+  // Стейт машина на entity невозможна из-за потери DI
+  private taskStatusHandlers = {
+    [TASK_STATUSES.TODO]: (task: Task) => this.statusChanged(task),
+    [TASK_STATUSES.APPROVING_TIME]: (task: Task) => this.statusChanged(task),
+    [TASK_STATUSES.APPROVED_TIME]: (task: Task) => this.statusChanged(task),
+    [TASK_STATUSES.WORK]: (task: Task) => this.statusChanged(task),
+    [TASK_STATUSES.APPROVING_DONE]: (task: Task) => this.statusChanged(task),
+    [TASK_STATUSES.DONE]: (task: Task) => this.statusChanged(task),
+  };
+
+  statusChanged(task: Task) {
+    // TODO telegram integration
+  }
+
   async create(createTaskDto: CreateTaskDto) {
     const task = new Task({});
 
@@ -65,11 +80,13 @@ export class TasksService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: number) {
+    return await this.tasksRepo.findOneByOrFail({ id });
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
+    const authedUser = await this.usersRepo.findOneByOrFail({ id: 1 });
+
     const task = await this.tasksRepo.findOneByOrFail({ id });
 
     let users = task.users;
@@ -91,6 +108,7 @@ export class TasksService {
     ) {
       // CHECK if user may change status
       task.status = updateTaskDto.status;
+      this.taskStatusHandlers[task.status](task);
     }
 
     return await this.entityManager.save(task);

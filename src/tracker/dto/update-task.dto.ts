@@ -20,4 +20,8 @@ export class UpdateTaskDto {
   @IsOptional()
   @IsEnum(TASK_STATUSES, { each: true })
   status?: TASK_STATUSES;
+
+  @IsInt()
+  @IsOptional()
+  duration?: number;
 }

@@ -53,6 +53,9 @@ export class Task {
   @Column({ nullable: false, unique: true })
   tgChatId: string;
 
+  @Column({ nullable: true })
+  duration?: number;
+
   @Column('jsonb', { nullable: false, default: [] })
   messages: [];
 
