@@ -6,9 +6,10 @@ import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
+    
     TGModule.forRootAsync({
       useFactory: async (configService: ConfigService) => ({
-        botKey: configService.get('TG_API_KEY'),
+        botKey: configService.get(`{TG_API_KEY}`),
       }),
       inject: [ConfigService],
     }),
