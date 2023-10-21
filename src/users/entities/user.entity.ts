@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -11,6 +10,7 @@ import {
   WorkspaceToUsers,
 } from '../../tracker/entities/workspace.entity';
 import { Task } from '../../tracker/entities/task.entity';
+import { Exclude } from 'class-transformer';
 
 export enum USER_ROLES {
   USER,
@@ -25,6 +25,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
+  @Exclude()
   @Column()
   password: string;
 
