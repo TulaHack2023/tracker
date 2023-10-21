@@ -9,6 +9,7 @@ import {
 } from './entities/task.entity';
 import { User } from '../users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Workspace } from './entities/workspace.entity';
 
 @Injectable()
 export class TasksService {
@@ -16,6 +17,8 @@ export class TasksService {
     @InjectRepository(Task)
     private tasksRepo: Repository<Task>,
 
+    @InjectRepository(Workspace)
+    private wsRepository: Repository<Workspace>,
     @InjectRepository(User)
     private usersRepo: Repository<User>,
     private entityManager: EntityManager,

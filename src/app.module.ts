@@ -4,6 +4,8 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { TrackerModule } from './tracker/tracker.module';
+import { WorkspacesModule } from './tracker/workspaces.module';
+import { ProjectsModule } from './tracker/projects.module';
 
 @Module({
   imports: [
@@ -11,6 +13,8 @@ import { TrackerModule } from './tracker/tracker.module';
     DatabaseModule,
     UsersModule,
     TrackerModule,
+    WorkspacesModule,
+    ProjectsModule,
   ],
   controllers: [],
   providers: [],

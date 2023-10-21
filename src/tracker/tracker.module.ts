@@ -20,4 +20,5 @@ import { User } from '../users/entities/user.entity';
   providers: [TasksService],
   controllers: [TasksController],
 })
-export class TrackerModule {}
+
+export class TrackerModule { }
