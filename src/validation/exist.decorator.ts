@@ -1,19 +1,20 @@
-import { IsUniqeInterface, IsUniqueConstraint } from './is-unique';
+import { IsUniqeInterface } from './is-unique';
 import { registerDecorator, ValidationOptions } from 'class-validator';
+import { ExistConstraint } from './exist';
 
 // decorator function
-export function isUnique(
+export function Exist(
   options: IsUniqeInterface,
   validationOptions?: ValidationOptions,
 ) {
   return function (object: any, propertyName: string) {
     registerDecorator({
-      name: 'isUnique',
+      name: 'Exist',
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       constraints: [options],
-      validator: IsUniqueConstraint,
+      validator: ExistConstraint,
     });
   };
 }

@@ -6,6 +6,9 @@ import { UsersModule } from './users/users.module';
 import { TrackerModule } from './tracker/tracker.module';
 import { NotificationModule } from './notifications/notification.module';
 import { TelegramModule } from './notifications/telegram/telegram.module';
+import { AuthModule } from './auth/auth.module';
+import { IsUniqueConstraint } from './validation/is-unique';
+import { ExistConstraint } from './validation/exist';
 
 @Module({
   imports: [
@@ -16,8 +19,9 @@ import { TelegramModule } from './notifications/telegram/telegram.module';
     UsersModule,
     TrackerModule,
     TelegramModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [IsUniqueConstraint, ExistConstraint],
 })
 export class AppModule {}

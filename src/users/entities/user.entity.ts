@@ -23,7 +23,7 @@ export class User {
   id: number;
 
   @Column({ unique: true })
-  email: string;
+  tel: string;
 
   @Exclude()
   @Column()
@@ -34,6 +34,9 @@ export class User {
 
   @Column({ unique: true })
   tg_name: string;
+
+  @Column()
+  tg_session: string;
 
   @OneToMany(
     () => WorkspaceToUsers,
